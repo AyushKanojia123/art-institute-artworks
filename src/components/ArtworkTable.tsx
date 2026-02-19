@@ -85,6 +85,7 @@ const ArtworkTable = () => {
   lazy
   loading={loading}
   onPage={onPageChange}
+  selectionMode="multiple"
   selection={selectedRows}
   onSelectionChange={(e: { value: Artwork[] }) => {
     onRowSelectChange(e.value ?? []);
