@@ -76,7 +76,7 @@ const ArtworkTable = () => {
         Selected Rows: {selectedIds.size}
       </div>
 
-      <DataTable<Artwork>
+      <DataTable<Artwork[]>
         value={artworks}
         paginator
         rows={ROWS_PER_PAGE}
