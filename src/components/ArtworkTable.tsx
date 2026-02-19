@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DataTable } from "primereact/datatable";
+import { DataTable, type DataTableStateEvent } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { fetchArtworks } from "../api/artworks";
 import type { Artwork } from "../types/artwork";
@@ -51,9 +51,9 @@ const ArtworkTable = () => {
     selectedIds.has(art.id)
   );
 
-  const onPageChange = (e: { page: number }) => {
-    setPage(e.page + 1);
-  };
+  const onPageChange = (event: DataTableStateEvent) => {
+  setPage((event.page ?? 0) + 1);
+};
 
   return (
     <div className="card">
