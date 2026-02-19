@@ -51,7 +51,7 @@ const ArtworkTable = () => {
     selectedIds.has(art.id)
   );
 
-  const onPageChange = (e: any) => {
+  const onPageChange = (e: { page: number }) => {
     setPage(e.page + 1);
   };
 
@@ -76,29 +76,29 @@ const ArtworkTable = () => {
         Selected Rows: {selectedIds.size}
       </div>
 
-      <DataTable<Artwork[]>
-        value={artworks}
-        paginator
-        rows={ROWS_PER_PAGE}
-        totalRecords={totalRecords}
-        first={(page - 1) * ROWS_PER_PAGE}
-        lazy
-        loading={loading}
-        onPage={onPageChange}
-        selection={selectedRows}
-        onSelectionChange={(e) =>
-          onRowSelectChange(e.value as Artwork[])
-        }
-        dataKey="id"
-      >
-        <Column selectionMode="multiple" headerStyle={{ width: "3rem" }} />
-        <Column field="title" header="Title" />
-        <Column field="place_of_origin" header="Origin" />
-        <Column field="artist_display" header="Artist" />
-        <Column field="inscriptions" header="Inscriptions" />
-        <Column field="date_start" header="Start Date" />
-        <Column field="date_end" header="End Date" />
-      </DataTable>
+  <DataTable<Artwork[]>
+  value={artworks}
+  paginator
+  rows={ROWS_PER_PAGE}
+  totalRecords={totalRecords}
+  first={(page - 1) * ROWS_PER_PAGE}
+  lazy
+  loading={loading}
+  onPage={onPageChange}
+  selection={selectedRows}
+  onSelectionChange={(e: { value: Artwork[] }) => {
+    onRowSelectChange(e.value ?? []);
+  }}
+  dataKey="id"
+>
+  <Column selectionMode="multiple" headerStyle={{ width: "3rem" }} />
+  <Column field="title" header="Title" />
+  <Column field="place_of_origin" header="Origin" />
+  <Column field="artist_display" header="Artist" />
+  <Column field="inscriptions" header="Inscriptions" />
+  <Column field="date_start" header="Start Date" />
+  <Column field="date_end" header="End Date" />
+</DataTable>
     </div>
   );
 };
